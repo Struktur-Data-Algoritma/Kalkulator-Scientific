@@ -21,7 +21,6 @@ import java.io.IOException;
  * @version 30 March 2018
  */
 public class BasicMode extends KeyAdapter {
-
     private static final int BUTTON_WIDTH = 50;
     private static final int BUTTON_HEIGHT = 30;
 
@@ -99,7 +98,6 @@ public class BasicMode extends KeyAdapter {
      * @return Panel with all the buttons to be added to the calculator.
      */
     private JPanel createButtons() {
-
         JPanel allFlow = new JPanel(new FlowLayout());
 
         JPanel allAll = new JPanel();
@@ -108,14 +106,13 @@ public class BasicMode extends KeyAdapter {
         JPanel all = new JPanel();
         all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
 
-
         JPanel topButtons = new JPanel();
         topButtons.setLayout(new GridLayout(9, 7, 4,4));
         
         JPanel bottomButtons = new JPanel();
         bottomButtons.setLayout(new GridLayout(1, 2, 0, 0));
         
-        //TOP ROW:
+        //BUTTON
         JButton fak = new JButton("!");
         fak.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         fak.setBackground(new java.awt.Color(253, 245, 230));
@@ -218,7 +215,6 @@ public class BasicMode extends KeyAdapter {
         cubic.addActionListener(e -> cubicClicked());
         topButtons.add(cubic);
         
-        //FIRST:
         JButton seven = new JButton("7");
         seven.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         seven.setBackground(new java.awt.Color(205, 197, 191));
@@ -243,7 +239,6 @@ public class BasicMode extends KeyAdapter {
         sin.addActionListener(e -> sinClicked());
         topButtons.add(sin);
         
-        // SECOND ROW:
         JButton four = new JButton("4");
         four.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         four.setBackground(new java.awt.Color(205, 197, 191));
@@ -268,7 +263,6 @@ public class BasicMode extends KeyAdapter {
         cos.addActionListener(e -> cosClicked());
         topButtons.add(cos);
         
-        // THIRD ROW:
         JButton one = new JButton("1");
         one.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         one.setBackground(new java.awt.Color(205, 197, 191));
@@ -356,14 +350,14 @@ public class BasicMode extends KeyAdapter {
     }
     
     private void sinClicked() {
-    	 if (!canEnterSymbol()) {
+    	if (!canEnterSymbol()) {
             inputField.setText(inputField.getText() + "sin(");
             bracketCounter++;
         }
-    	 else {
-    		 showWarning();
-    	 }
-	}
+    	else {
+            showWarning();
+    	}
+    }
     
     private void lnClicked(){
         if(!canEnterSymbol()){
@@ -376,55 +370,55 @@ public class BasicMode extends KeyAdapter {
     }
     
     private void printClicked(){
-      File file = new File("C:\\Users\\N I T RO\\Documents\\GitHub\\Kalkulator-Scientific\\Kalkulator-Scientific-master\\Kalkulator\\hasil\\Hasil.txt");
+        File file = new File("C:\\Users\\N I T RO\\Documents\\GitHub\\Kalkulator-Scientific\\Kalkulator-Scientific-master\\Kalkulator\\hasil\\Hasil.txt");
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
-                
             bw.write("RESULT HASIL KALKULASI :");
             bw.newLine();
             bw.write("1*3+2");
             bw.newLine();
             bw.write("HASIL = 5");
-            
-        }catch(FileNotFoundException ex){
+        }
+        catch(FileNotFoundException ex){
             System.out.println("File "+file.getName()+" Tidak Ditemukan"); 
-        }catch(IOException ex){          
+        }
+        catch(IOException ex){          
             System.out.println("File "+file.getName()+" Tidak Dapat DIbaca");
         }
-	}
+    }
     
     private void aboutClicked(){
         new Fr_about().show();
     }
     
     private void cosClicked() {
-    	 if (!canEnterSymbol()) {
+        if (!canEnterSymbol()) {
             inputField.setText(inputField.getText() + "cos(");
             bracketCounter++;
         }
-    	 else {
-    		 showWarning();
+    	else {
+            showWarning();
     	 }
-	}
+    }
     
     private void tanClicked() {
-    	 if (!canEnterSymbol()) {
+    	if (!canEnterSymbol()) {
             inputField.setText(inputField.getText() + "tan(");
             bracketCounter++;
         }
-    	 else {
-    		 showWarning();
-    	 }
-	}
+    	else {
+            showWarning();
+        }
+    }
     
     private void logClicked() {
-    	 if (!canEnterSymbol()) {
+    	if (!canEnterSymbol()) {
             inputField.setText(inputField.getText() + "log(");
             bracketCounter++;
         }
-    	 else {
-    		 showWarning();
-    	 }
-	}
+    	else {
+            showWarning();
+    	}
+    }
 
     /**
      * Updates the display are to include the expression and its result.
@@ -460,7 +454,6 @@ public class BasicMode extends KeyAdapter {
         }
     }
 
-    
     /**
      * Adds a square to the expression.
      */
@@ -575,7 +568,6 @@ public class BasicMode extends KeyAdapter {
         updateDisplayField(str, result);
         clearInputField();
         updateInputField(result);
-
     }
 
     /**
@@ -588,10 +580,6 @@ public class BasicMode extends KeyAdapter {
             updateInputField(newCharacter);
             enableDecimalPoint();
         }
-        /*else if (newCharacter.equals("-") && (inputField.getText().equals("") || inputField.getText().charAt(inputField.getText().length()-1) == '(')) {
-            updateInputField("-");
-            enableDecimalPoint();
-        }*/
         else {
             showWarning();
         }
@@ -729,7 +717,5 @@ public class BasicMode extends KeyAdapter {
         else {
             // Do nothing.
         }
-
     }
-
 }

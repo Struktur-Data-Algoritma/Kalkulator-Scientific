@@ -343,10 +343,6 @@ public class Evaluator {
                 newStr.append(PHI);
                 i++;
             }
-//            else if (str.charAt(i) == '~') {
-//                newStr.append(CUBICS);
-//                i++;
-//            }
             else if (str.charAt(i) == '!') {
                 newStr.append(FAK);
                 i++;

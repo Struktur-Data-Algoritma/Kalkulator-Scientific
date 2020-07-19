@@ -120,6 +120,5 @@ public class BinaryTree {
            root.setRight(rightChild);
            size++;
         }
-
     }
 }
