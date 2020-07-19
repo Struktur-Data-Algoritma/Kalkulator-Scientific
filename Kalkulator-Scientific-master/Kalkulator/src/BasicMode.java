@@ -105,7 +105,10 @@ public class BasicMode extends KeyAdapter {
 
 
         JPanel topButtons = new JPanel();
-        topButtons.setLayout(new GridLayout(8, 7, 4,4));
+        topButtons.setLayout(new GridLayout(9, 7, 4,4));
+        
+        JPanel bottomButtons = new JPanel();
+        bottomButtons.setLayout(new GridLayout(1, 2, 0, 0));
         
         //TOP ROW:
         JButton fak = new JButton("!");
@@ -309,8 +312,21 @@ public class BasicMode extends KeyAdapter {
         ln.addActionListener(e -> lnClicked()); 
         topButtons.add(ln);
         
+        JButton about = new JButton("About");
+        about.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        about.setBackground(new java.awt.Color(0, 200, 154));
+        about.addActionListener(e -> aboutClicked()); 
+        bottomButtons.add(about);
+        
+        JButton print_to_file = new JButton("Print to File");
+        print_to_file.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        print_to_file.setBackground(new java.awt.Color(0, 250, 154));
+        print_to_file.addActionListener(e -> printClicked()); 
+        bottomButtons.add(print_to_file);
+        
         all.add(topButtons);
-
+        all.add(bottomButtons);
+        
         allAll.add(all);
         allFlow.add(allAll);
         return allFlow;
@@ -348,6 +364,24 @@ public class BasicMode extends KeyAdapter {
         if(!canEnterSymbol()){
             inputField.setText(inputField.getText() + "lon(");
             bracketCounter++;
+        }
+    	 else {
+    		 showWarning();
+    	 }
+	}
+    
+    private void printClicked(){
+        if(!canEnterSymbol()){
+         
+        }
+    	 else {
+    		 showWarning();
+    	 }
+	}
+    
+    private void aboutClicked(){
+        if(!canEnterSymbol()){
+            
         }
     	 else {
     		 showWarning();
@@ -418,6 +452,7 @@ public class BasicMode extends KeyAdapter {
         }
     }
 
+    
     /**
      * Adds a square to the expression.
      */
