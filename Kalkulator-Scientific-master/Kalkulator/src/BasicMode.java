@@ -4,6 +4,11 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Stack;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 
 // TODO: add checking validity of the expression when clicking equals
 // TODO: fix entering with keyboard
@@ -371,12 +376,20 @@ public class BasicMode extends KeyAdapter {
 	}
     
     private void printClicked(){
-        if(!canEnterSymbol()){
-         
+      File file = new File("C:\\Users\\N I T RO\\Documents\\GitHub\\Kalkulator-Scientific\\Kalkulator-Scientific-master\\Kalkulator\\hasil\\Hasil.txt");
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
+                
+            bw.write("RESULT HASIL KALKULASI :");
+            bw.newLine();
+            bw.write("1*3+2");
+            bw.newLine();
+            bw.write("HASIL = 5");
+            
+        }catch(FileNotFoundException ex){
+            System.out.println("File "+file.getName()+" Tidak Ditemukan"); 
+        }catch(IOException ex){          
+            System.out.println("File "+file.getName()+" Tidak Dapat DIbaca");
         }
-    	 else {
-    		 showWarning();
-    	 }
 	}
     
     private void aboutClicked(){
@@ -649,7 +662,7 @@ public class BasicMode extends KeyAdapter {
      * Whenever a user attempts to enter an invalid combination of symbols this warning is shown.
      */
     private void showWarning() {
-        JOptionPane.showMessageDialog(null, "Invalid operation.", "Invalid operation.", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Operasi Salah.", "AWAS!!!!!", JOptionPane.WARNING_MESSAGE);
     }
 
     /**
