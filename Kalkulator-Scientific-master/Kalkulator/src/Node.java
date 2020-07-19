@@ -1,13 +1,14 @@
 import com.sun.istack.internal.Nullable;
 
-/**
+/*
  * This class represent a node of the binary tree. Each node can have
  * a parent, a left child, and a right child. Each node can hold a value of any object type.
  *
  * @author Luka Kralj
- * @version 30 March 2018
+ * @version 19 07 2020
  */
 public class Node {
+    /*ATRIBUT*/
     private Object value;
     private Node parent;
     private Node left;
@@ -20,12 +21,13 @@ public class Node {
      * @param leftChild Left child of the node, if any.
      * @param rightChild Right child of the node if any.
      */
+    /*MEMBUAT NODE BARU, DAN AKAN DI SET ANAK KANAN DAN KIRI NYA JIKA ADA, JIKA TIDAK ADA AKAN DI SET SEBAGAI NULL*/
     public Node(Object value, @Nullable Node leftChild, @Nullable Node rightChild) {
         this.value = value;
         parent = null;
         left = leftChild;
         right = rightChild;
-        // Update parents of the children.
+        //SET PARENT DARI KEDUA NODE
         if (leftChild != null) {
             leftChild.setParent(this);
         }
@@ -34,6 +36,8 @@ public class Node {
         }
     }
 
+    /**GETTER METHOD**/
+    
     /**
      *
      * @return Parent of the node.
@@ -58,6 +62,8 @@ public class Node {
         return right;
     }
 
+    /**SETTER METHOD**/
+    
     /**
      *
      * @return Value that the node holds.

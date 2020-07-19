@@ -10,15 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-// TODO: add checking validity of the expression when clicking equals
-// TODO: fix entering with keyboard
-// TODO: allow leading minus for negative numbers.
-
-/**
+/*
  * This class displays a simple calculator.
  *
  * @author Luka Kralj
- * @version 30 March 2018
+ * @author Sabar Muhamad Itikap
+ * @author Giusty Fadh W
+ * @version 19 07 2020
  */
 public class BasicMode extends KeyAdapter {
 
