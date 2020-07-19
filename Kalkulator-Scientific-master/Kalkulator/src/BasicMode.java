@@ -110,13 +110,13 @@ public class BasicMode extends KeyAdapter {
         //TOP ROW:
         JButton fak = new JButton("!");
         fak.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        fak.setBackground(Color.lightGray);
+        fak.setBackground(new java.awt.Color(253, 245, 230));
         fak.addActionListener(e -> fakClicked());
         topButtons.add(fak);
         
         JButton phi = new JButton("<html><span>&#928</span></html>");
         phi.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        phi.setBackground(Color.lightGray);
+        phi.setBackground(new java.awt.Color(253, 245, 230));
         phi.addActionListener(e -> phiClicked());
         topButtons.add(phi);
         
@@ -140,172 +140,172 @@ public class BasicMode extends KeyAdapter {
         
         JButton openingBracket = new JButton("(");
         openingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        openingBracket.setBackground(Color.lightGray);
+        openingBracket.setBackground(new java.awt.Color(238, 173, 14));
         openingBracket.addActionListener(e -> openingBracketClicked());
         topButtons.add(openingBracket);
 
         JButton closingBracket = new JButton(")");
         closingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        closingBracket.setBackground(Color.lightGray);
+        closingBracket.setBackground(new java.awt.Color(238, 173, 14));
         closingBracket.addActionListener(e -> closingBracketClicked());
         topButtons.add(closingBracket);
         
         JButton log = new JButton("log");
         log.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        log.setBackground(Color.lightGray);
+        log.setBackground(new java.awt.Color(238, 173, 14));
         log.addActionListener(e -> logClicked());
         topButtons.add(log);
         
         JButton percent = new JButton("%");
         percent.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        percent.setBackground(Color.lightGray);
+        percent.setBackground(new java.awt.Color(238, 173, 14));
         percent.addActionListener(e -> percentClicked());
         topButtons.add(percent);
         
         JButton divide = new JButton("/");
         divide.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        divide.setBackground(Color.YELLOW);
+        divide.setBackground(new java.awt.Color(238, 173, 14));
         divide.addActionListener(e -> operatorClicked("/"));
         topButtons.add(divide);
         
         JButton multiply = new JButton("*");
         multiply.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        multiply.setBackground(Color.YELLOW);
+        multiply.setBackground(new java.awt.Color(238, 173, 14));
         multiply.addActionListener(e -> operatorClicked("*"));
         topButtons.add(multiply);
         
         JButton minus = new JButton("-");
         minus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        minus.setBackground(Color.YELLOW);
+        minus.setBackground(new java.awt.Color(238, 173, 14));
         minus.addActionListener(e -> operatorClicked("-"));
         topButtons.add(minus);
 
         JButton plus = new JButton("+");
         plus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        plus.setBackground(Color.YELLOW);
+        plus.setBackground(new java.awt.Color(238, 173, 14));
         plus.addActionListener(e -> operatorClicked("+"));
         topButtons.add(plus);
 
         JButton square = new JButton("<html>x<sup>2</sup></html>");
         square.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        square.setBackground(Color.PINK);
+        square.setBackground(new java.awt.Color(238, 197, 145));
         square.addActionListener(e -> squareClicked());
         topButtons.add(square);
         
         JButton cubics = new JButton("<html>x<sup>3</sup></html>"); //pangkat 3
         cubics.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cubics.setBackground(Color.PINK);
+        cubics.setBackground(new java.awt.Color(238, 197, 145));
         cubics.addActionListener(e -> cubicsClicked());
         topButtons.add(cubics);
         
         JButton sqrt = new JButton("<html><span>&#8730;</span></html>");
         sqrt.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        sqrt.setBackground(Color.PINK);
+        sqrt.setBackground(new java.awt.Color(238, 197, 145));
         sqrt.addActionListener(e -> sqrtClicked());
         topButtons.add(sqrt);
         
-        JButton cubic = new JButton("<html><span>3&#8730;</span></html>"); //akar pangkat 3
+        JButton cubic = new JButton("<html><span><sup>3</sup>&#8730;</span></html>"); //akar pangkat 3
         cubic.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cubic.setBackground(Color.PINK);
+        cubic.setBackground(new java.awt.Color(238, 197, 145));
         cubic.addActionListener(e -> cubicClicked());
         topButtons.add(cubic);
         
         //FIRST:
         JButton seven = new JButton("7");
         seven.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        seven.setBackground(Color.CYAN);
+        seven.setBackground(new java.awt.Color(205, 197, 191));
         seven.addActionListener(e -> updateInputField("7"));
         topButtons.add(seven);
 
         JButton eight = new JButton("8");
         eight.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        eight.setBackground(Color.CYAN);
+        eight.setBackground(new java.awt.Color(205, 197, 191));
         eight.addActionListener(e -> updateInputField("8"));
         topButtons.add(eight);
 
         JButton nine = new JButton("9");
         nine.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        nine.setBackground(Color.CYAN);
+        nine.setBackground(new java.awt.Color(205, 197, 191));
         nine.addActionListener(e -> updateInputField("9"));
         topButtons.add(nine);
         
         JButton sin = new JButton("sin");
         sin.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        sin.setBackground(Color.ORANGE);
+        sin.setBackground(new java.awt.Color(238, 197, 145));
         sin.addActionListener(e -> sinClicked());
         topButtons.add(sin);
         
         // SECOND ROW:
         JButton four = new JButton("4");
         four.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        four.setBackground(Color.CYAN);
+        four.setBackground(new java.awt.Color(205, 197, 191));
         four.addActionListener(e -> updateInputField("4"));
         topButtons.add(four);
 
         JButton five = new JButton("5");
         five.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        five.setBackground(Color.CYAN);
+        five.setBackground(new java.awt.Color(205, 197, 191));
         five.addActionListener(e -> updateInputField("5"));
         topButtons.add(five);
 
         JButton six = new JButton("6");
         six.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        six.setBackground(Color.CYAN);
+        six.setBackground(new java.awt.Color(205, 197, 191));
         six.addActionListener(e -> updateInputField("6"));
         topButtons.add(six);
         
         JButton cos = new JButton("cos");
         cos.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cos.setBackground(Color.ORANGE);
+        cos.setBackground(new java.awt.Color(238, 197, 145));
         cos.addActionListener(e -> cosClicked());
         topButtons.add(cos);
         
         // THIRD ROW:
         JButton one = new JButton("1");
         one.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        one.setBackground(Color.CYAN);
+        one.setBackground(new java.awt.Color(205, 197, 191));
         one.addActionListener(e -> updateInputField("1"));
         topButtons.add(one);
 
         JButton two = new JButton("2");
         two.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        two.setBackground(Color.CYAN);
+        two.setBackground(new java.awt.Color(205, 197, 191));
         two.addActionListener(e -> updateInputField("2"));
         topButtons.add(two);
 
         JButton three = new JButton("3");
         three.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        three.setBackground(Color.CYAN);
+        three.setBackground(new java.awt.Color(205, 197, 191));
         three.addActionListener(e -> updateInputField("3"));
         topButtons.add(three);
         
         JButton tan = new JButton("tan");
         tan.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        tan.setBackground(Color.ORANGE);
+        tan.setBackground(new java.awt.Color(238, 197, 145));
         tan.addActionListener(e -> tanClicked());
         topButtons.add(tan);
 
         JButton decimalPoint = new JButton(".");
         decimalPoint.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        decimalPoint.setBackground(Color.LIGHT_GRAY);
+        decimalPoint.setBackground(new java.awt.Color(238, 173, 14));
         decimalPoint.addActionListener(e -> decimalPointClicked());
         topButtons.add(decimalPoint);
         
         JButton zero = new JButton("0");
         zero.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        zero.setBackground(Color.CYAN);
+        zero.setBackground(new java.awt.Color(205, 197, 191));
         zero.addActionListener(e -> updateInputField("0"));
         topButtons.add(zero);
      
         JButton equals = new JButton("=");
         equals.setPreferredSize(new Dimension(BUTTON_WIDTH*2 + 6, BUTTON_HEIGHT));
-        equals.setBackground(Color.GREEN);
+        equals.setBackground(new java.awt.Color(0, 250, 154));
         equals.addActionListener(e -> equalsClicked());
         topButtons.add(equals);
         
         JButton ln = new JButton("ln");
         ln.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        ln.setBackground(Color.LIGHT_GRAY);
+        ln.setBackground(new java.awt.Color(238, 197, 145));
         ln.addActionListener(e -> lnClicked()); 
         topButtons.add(ln);
         
@@ -450,7 +450,7 @@ public class BasicMode extends KeyAdapter {
     
     private void cubicsClicked() {
         if (canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "~");
+            inputField.setText(inputField.getText() + "^3");
         }
         else {
             showWarning();
@@ -472,7 +472,7 @@ public class BasicMode extends KeyAdapter {
     
     private void  cubicClicked() {
         if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "cubic(");
+            inputField.setText(inputField.getText() + "cbrt(");
             bracketCounter++;
         }
         else {

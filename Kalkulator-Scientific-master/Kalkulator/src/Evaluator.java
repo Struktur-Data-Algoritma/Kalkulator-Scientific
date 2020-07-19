@@ -105,6 +105,9 @@ public class Evaluator {
                 else if (c == CUBIC) {
                     newExpression = expression.substring(index + 1, expression.length());
                 }
+                else if (c == CUBICS) {
+                    newExpression = expression.substring(index + 1, expression.length());
+                }
                 else if (c == LON) {
                     newExpression = expression.substring(index + 1, expression.length());
                 }
@@ -222,6 +225,9 @@ public class Evaluator {
                 else if (c == CUBIC) {
                     newExpression = expression.substring(index + 1, expression.length());
                 }
+                else if (c == CUBICS) {
+                    newExpression = expression.substring(index + 1, expression.length());
+                }
                 else if (c == LON){
                     newExpression = expression.substring(index + 1, expression.length());
                 }
@@ -319,12 +325,13 @@ public class Evaluator {
      */
     private String replace(String str){
         str = str.replaceAll("sqrt", "" + SQRT);
-        str = str.replaceAll("cubic", "" + CUBIC);
+        str = str.replaceAll("cbrt", "" + CUBIC);
         str = str.replaceAll("sin", "" + SIN);
         str = str.replaceAll("cos", "" + COS);
         str = str.replaceAll("tan", "" + TAN);
         str = str.replaceAll("log", "" + LOG);
         str = str.replaceAll("lon", "" + LON);
+        str = str.replaceAll(CUBICS + "", "^3");
 
         StringBuffer newStr = new StringBuffer();
         for (int i = 0; i < str.length(); i++) {
@@ -336,10 +343,10 @@ public class Evaluator {
                 newStr.append(PHI);
                 i++;
             }
-            else if (str.charAt(i) == '~') {
-                newStr.append(CUBICS);
-                i++;
-            }
+//            else if (str.charAt(i) == '~') {
+//                newStr.append(CUBICS);
+//                i++;
+//            }
             else if (str.charAt(i) == '!') {
                 newStr.append(FAK);
                 i++;
