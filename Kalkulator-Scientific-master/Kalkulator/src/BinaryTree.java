@@ -1,21 +1,23 @@
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
-/*
+/**
  * Represents a binary tree which is composed of nodes that can hold any object.
  * The implementation is not complete but is sufficient for this calculator.
  *
  * @author Luka Kralj
- * @author Sabar Muhamad Itikap
- * @version 19 07 2020
+ * @version 30 March 2018
  */
-
 public class BinaryTree {
-    /*ATRIBUT*/
     private int size;
     private Node root;
 
-    public BinaryTree(Node root) { //KONSTRUKTOR DENGAN PARAMETER NODE, YANG AKAN DIJADIKAN ROOT DARI SUATU BINARY TREE
+    /**
+     * Create new binary tree with the specified root.
+     *
+     * @param root Root of the new tree.
+     */
+    public BinaryTree(Node root) {
         size = 0;
         if (root != null) {
             size++;
@@ -23,37 +25,67 @@ public class BinaryTree {
         this.root = root;
     }
 
-/*KONSTRUKTOR TANPA PARAMETER SEHINGGA ROOT BINARY TREE MASIH NULL*/
+    /**
+     * Create a new empty binary tree.
+     */
     public BinaryTree() {
         this(null);
     }
 
-/*RETURN TRUE JIKA V MEMILIKI LEFT/RIGHT CHILD*/
+    /**
+     * Check if node v is internal.
+     *
+     * @param v Node to check.
+     * @return True if v has any children.
+     */
     public boolean isInternal(Node v) {
         return hasLeft(v) || hasRight(v);
     }
 
-/*RETURN TRUE JIKA V TIDAK MEMILIKI LEFT DAN RIGHT CHILD*/
+    /**
+     * Check if node v is external.
+     *
+     * @param v Node to check.
+     * @return True if v has no children.
+     */
     public boolean isExternal(Node v) {
         return !hasLeft(v) && !hasRight(v);
     }
 
-/*RETURN TRUE JIKA V MEMILIKI LEFT CHILD DAN TIDAK NULL*/
+    /**
+     * Check if node v has a left child.
+     *
+     * @param v Node to check.
+     * @return True if v has a left child.
+     */
     public boolean hasLeft(Node v) {
         return v.getLeft() != null;
     }
 
-/*RETURN TRUE JIKA V MEMILIKI RIGHT CHILD DAN TIDAK NULL*/
+    /**
+     * Check if node v has a right child.
+     *
+     * @param v Node to check.
+     * @return True if v has a right child.
+     */
     public boolean hasRight(Node v) {
         return v.getRight() != null;
     }
 
-/*RETURN TRUE JIKA V ADALAH ROOT DARI TREE*/
+    /**
+     * Check if node v is a root of this tree,
+     *
+     * @param v Node to check.
+     * @return True if v is a root of this tree.
+     */
     public boolean isRoot(Node v) {
         return v == root;
     }
 
-/*RETURN ROOT NODE DARI TREE*/
+    /**
+     *
+     * @return Root node of the tree.
+     */
     public Node root() {
         return root;
     }
@@ -62,12 +94,17 @@ public class BinaryTree {
      *
      * @return Number of nodes in the tree.
      */
-/*RETURN JUMLAH NODE DI DALAM TREE*/
     public int size(){
         return size;
     }
 
-/*UPDATE BINARY TREE, ROOT LAMA DIISI DENGAN ROOT BARU, ROOT SEBELUMNYA MENJADI ANAK KIRI DARI ROOT BARU (ANAK KANAN OPSIONAL)*/
+    /**
+     * Updates the tree. New root is set according to the parameter. The old root is set
+     * as the left child of the new root. If there is a right child of the new root it is also set.
+     *
+     * @param newRoot New root of the tree.
+     * @param rightChild The right child of the new root.
+     */
     public void updateTree(@NotNull Node newRoot, @Nullable Node rightChild) {
         if (root == null) {
             root = newRoot;
@@ -85,29 +122,4 @@ public class BinaryTree {
         }
 
     }
-    
-    /***TRAVERSAL***/
-//    public void preOrder(Node node){
-//        if (node != null) {
-//            System.out.print(" " + node.getValue());
-//            preOrder(node.getLeftChild());
-//            preOrder(node.getRightChild());
-//        }
-//    }
-//    
-//    public void inOrder(Node node){
-//        if (node != null) {
-//            inOrder(node.getLeftChild());
-//            System.out.print(" " + node.getValue());
-//            inOrder(node.getRightChild());
-//        }
-//    }
-//    
-//    public void postOrder(Node node){
-//        if (node != null) {
-//            postOrder(node.getLeftChild());
-//            postOrder(node.getRightChild());
-//            System.out.print(" " + node.getValue());
-//        }
-//    }
 }

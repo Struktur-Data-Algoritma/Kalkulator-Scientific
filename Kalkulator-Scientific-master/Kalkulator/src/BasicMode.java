@@ -10,13 +10,15 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/*
+// TODO: add checking validity of the expression when clicking equals
+// TODO: fix entering with keyboard
+// TODO: allow leading minus for negative numbers.
+
+/**
  * This class displays a simple calculator.
  *
  * @author Luka Kralj
- * @author Sabar Muhamad Itikap
- * @author Giusty Fadh W
- * @version 19 07 2020
+ * @version 30 March 2018
  */
 public class BasicMode extends KeyAdapter {
 
@@ -368,10 +370,10 @@ public class BasicMode extends KeyAdapter {
             inputField.setText(inputField.getText() + "lon(");
             bracketCounter++;
         }
-    	 else {
-    		 showWarning();
-    	 }
-	}
+    	else {
+            showWarning();
+    	}
+    }
     
     private void printClicked(){
       File file = new File("C:\\Users\\N I T RO\\Documents\\GitHub\\Kalkulator-Scientific\\Kalkulator-Scientific-master\\Kalkulator\\hasil\\Hasil.txt");
@@ -391,13 +393,8 @@ public class BasicMode extends KeyAdapter {
 	}
     
     private void aboutClicked(){
-        if(!canEnterSymbol()){
-            
-        }
-    	 else {
-    		 showWarning();
-    	 }
-	}
+        new Fr_about().show();
+    }
     
     private void cosClicked() {
     	 if (!canEnterSymbol()) {

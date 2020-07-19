@@ -7,9 +7,7 @@ import java.util.List;
  * The tree is then traversed to produce a single value result (type double).
  *
  * @author Luka Kralj
- * @author Giusty Fadh W
- * @author Sabar Muhamad Itikap
- * @version 19 07 2020
+ * @version 30 March 2018
  */
 public class Evaluator {
     public static final char SQRT = 'V';
