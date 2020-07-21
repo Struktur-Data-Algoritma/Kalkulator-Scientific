@@ -102,15 +102,11 @@ public class BasicMode extends KeyAdapter {
         JPanel all = new JPanel();
         all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
 
-
         JPanel topButtons = new JPanel();
         topButtons.setLayout(new GridLayout(3, 6, 3,3));
         
         JPanel middleButtons = new JPanel();
-        middleButtons.setLayout(new GridLayout(2, 1, 0,0));
-        
-        
-
+        middleButtons.setLayout(new GridLayout(1, 2, 0, 0));
 
         // FIRST ROW:
 
@@ -280,14 +276,15 @@ public class BasicMode extends KeyAdapter {
         scf.addActionListener(e -> scfClicked());
         bottomRow.add(scf);
         
-        JButton clear_all = new JButton("Clear All");
-        clear_all.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        clear_all.setBackground(Color.YELLOW);
-        clear_all.addActionListener(e -> clearClicked()); 
-        middleButtons.add(clear_all);
+        JButton clear = new JButton("Clear All");
+        clear.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        clear.setBackground(Color.YELLOW);
+        clear.addActionListener(e -> clearClicked()); 
+        middleButtons.add(clear);
 
         all.add(bottomRow);
-
+        all.add(middleButtons);
+        
         allAll.add(all);
         allFlow.add(allAll);
         return allFlow;
