@@ -4,11 +4,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Stack;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 
 // TODO: add checking validity of the expression when clicking equals
 // TODO: fix entering with keyboard
@@ -21,10 +16,11 @@ import java.io.IOException;
  * @version 30 March 2018
  */
 public class BasicMode extends KeyAdapter {
+
     private static final int BUTTON_WIDTH = 50;
     private static final int BUTTON_HEIGHT = 30;
 
-    private static final char[] validChars = {0,1,2,3,4,5,6,7,8,9,'(',')','+','-','*','/', '%', Evaluator.LON, Evaluator.SQUARE, Evaluator.SQRT, Evaluator.SIN, Evaluator.COS, Evaluator.TAN, Evaluator.PHI, Evaluator.FAK, Evaluator.CUBICS, Evaluator.CUBIC};
+    private static final char[] validChars = {0,1,2,3,4,5,6,7,8,9,'(',')','+','-','*','/', '%', Evaluator.SQUARE, Evaluator.SQRT};
 
     private JTextArea displayArea; // Results shown here.
     private JTextField inputField; // Expressions entered here.
@@ -44,21 +40,20 @@ public class BasicMode extends KeyAdapter {
         bracketCounter = 0;
         previousExpressions = new Stack<>();
 
-        JFrame frame = new JFrame("KALKULATOR SCIENTIFIC");
+        JFrame frame = new JFrame("Basic mode");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = frame.getContentPane();
 
         JPanel all = new JPanel();
         all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
-        
-        all.setBorder(new EmptyBorder(7, 7, 7, 7));
+        all.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         JPanel labels = new JPanel(new BorderLayout());
-        labels.setBorder(new LineBorder(Color.BLACK, 3)); 
+        labels.setBorder(new LineBorder(Color.GRAY, 1));
 
         displayArea = new JTextArea();
         displayArea.setOpaque(true);
-        displayArea.setBackground(Color.WHITE); //kolom hasil
+        displayArea.setBackground(Color.WHITE);
         displayArea.setLineWrap(false);
         displayArea.setEditable(false);
 
@@ -87,7 +82,7 @@ public class BasicMode extends KeyAdapter {
         frame.addKeyListener(this);
         frame.setFocusableWindowState(true);
         frame.setAutoRequestFocus(true);
-        frame.setResizable(false);
+        //frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
@@ -98,6 +93,7 @@ public class BasicMode extends KeyAdapter {
      * @return Panel with all the buttons to be added to the calculator.
      */
     private JPanel createButtons() {
+
         JPanel allFlow = new JPanel(new FlowLayout());
 
         JPanel allAll = new JPanel();
@@ -106,28 +102,37 @@ public class BasicMode extends KeyAdapter {
         JPanel all = new JPanel();
         all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
 
+
         JPanel topButtons = new JPanel();
-        topButtons.setLayout(new GridLayout(9, 7, 4,4));
-        
-        JPanel middleButtons = new JPanel();
-        middleButtons.setLayout(new GridLayout(2, 2, 0, 0));
-        
-        JPanel bottomButtons = new JPanel();
-        bottomButtons.setLayout(new GridLayout(1, 2, 0, 0));
-        
-        //BUTTON
-        JButton fak = new JButton("!");
-        fak.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        fak.setBackground(new java.awt.Color(253, 245, 230));
-        fak.addActionListener(e -> fakClicked());
-        topButtons.add(fak);
-        
-        JButton phi = new JButton("<html><span>&#928</span></html>");
-        phi.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        phi.setBackground(new java.awt.Color(253, 245, 230));
-        phi.addActionListener(e -> phiClicked());
-        topButtons.add(phi);
-        
+        topButtons.setLayout(new GridLayout(3, 6, 3,3));
+
+
+        // FIRST ROW:
+
+        JButton seven = new JButton("7");
+        seven.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        seven.setBackground(Color.WHITE);
+        seven.addActionListener(e -> updateInputField("7"));
+        topButtons.add(seven);
+
+        JButton eight = new JButton("8");
+        eight.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        eight.setBackground(Color.WHITE);
+        eight.addActionListener(e -> updateInputField("8"));
+        topButtons.add(eight);
+
+        JButton nine = new JButton("9");
+        nine.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        nine.setBackground(Color.WHITE);
+        nine.addActionListener(e -> updateInputField("9"));
+        topButtons.add(nine);
+
+        JButton divide = new JButton("/");
+        divide.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        divide.setBackground(Color.WHITE);
+        divide.addActionListener(e -> operatorClicked("/"));
+        topButtons.add(divide);
+
         JButton undo = new JButton();
         undo.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         undo.setBackground(Color.WHITE);
@@ -135,7 +140,7 @@ public class BasicMode extends KeyAdapter {
         undo.setIcon(undoIcon);
         undo.addActionListener(e -> undoClicked());
         topButtons.add(undo);
-        
+
         JButton delete = new JButton();
         delete.setMinimumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         delete.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
@@ -145,201 +150,136 @@ public class BasicMode extends KeyAdapter {
         delete.setIcon(deleteIcon);
         delete.addActionListener(e -> deleteClicked());
         topButtons.add(delete);
-        
-        JButton openingBracket = new JButton("(");
-        openingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        openingBracket.setBackground(new java.awt.Color(238, 173, 14));
-        openingBracket.addActionListener(e -> openingBracketClicked());
-        topButtons.add(openingBracket);
 
-        JButton closingBracket = new JButton(")");
-        closingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        closingBracket.setBackground(new java.awt.Color(238, 173, 14));
-        closingBracket.addActionListener(e -> closingBracketClicked());
-        topButtons.add(closingBracket);
-        
-        JButton log = new JButton("log");
-        log.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        log.setBackground(new java.awt.Color(238, 173, 14));
-        log.addActionListener(e -> logClicked());
-        topButtons.add(log);
-        
-        JButton percent = new JButton("%");
-        percent.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        percent.setBackground(new java.awt.Color(238, 173, 14));
-        percent.addActionListener(e -> percentClicked());
-        topButtons.add(percent);
-        
-        JButton divide = new JButton("/");
-        divide.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        divide.setBackground(new java.awt.Color(238, 173, 14));
-        divide.addActionListener(e -> operatorClicked("/"));
-        topButtons.add(divide);
-        
-        JButton multiply = new JButton("*");
-        multiply.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        multiply.setBackground(new java.awt.Color(238, 173, 14));
-        multiply.addActionListener(e -> operatorClicked("*"));
-        topButtons.add(multiply);
-        
-        JButton minus = new JButton("-");
-        minus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        minus.setBackground(new java.awt.Color(238, 173, 14));
-        minus.addActionListener(e -> operatorClicked("-"));
-        topButtons.add(minus);
+        // SECOND ROW:
 
-        JButton plus = new JButton("+");
-        plus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        plus.setBackground(new java.awt.Color(238, 173, 14));
-        plus.addActionListener(e -> operatorClicked("+"));
-        topButtons.add(plus);
-
-        JButton square = new JButton("<html>x<sup>2</sup></html>");
-        square.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        square.setBackground(new java.awt.Color(238, 197, 145));
-        square.addActionListener(e -> squareClicked());
-        topButtons.add(square);
-        
-        JButton cubics = new JButton("<html>x<sup>3</sup></html>"); //pangkat 3
-        cubics.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cubics.setBackground(new java.awt.Color(238, 197, 145));
-        cubics.addActionListener(e -> cubicsClicked());
-        topButtons.add(cubics);
-        
-        JButton sqrt = new JButton("<html><span>&#8730;</span></html>");
-        sqrt.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        sqrt.setBackground(new java.awt.Color(238, 197, 145));
-        sqrt.addActionListener(e -> sqrtClicked());
-        topButtons.add(sqrt);
-        
-        JButton cubic = new JButton("<html><span><sup>3</sup>&#8730;</span></html>"); //akar pangkat 3
-        cubic.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cubic.setBackground(new java.awt.Color(238, 197, 145));
-        cubic.addActionListener(e -> cubicClicked());
-        topButtons.add(cubic);
-        
-        JButton seven = new JButton("7");
-        seven.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        seven.setBackground(new java.awt.Color(205, 197, 191));
-        seven.addActionListener(e -> updateInputField("7"));
-        topButtons.add(seven);
-
-        JButton eight = new JButton("8");
-        eight.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        eight.setBackground(new java.awt.Color(205, 197, 191));
-        eight.addActionListener(e -> updateInputField("8"));
-        topButtons.add(eight);
-
-        JButton nine = new JButton("9");
-        nine.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        nine.setBackground(new java.awt.Color(205, 197, 191));
-        nine.addActionListener(e -> updateInputField("9"));
-        topButtons.add(nine);
-        
-        JButton sin = new JButton("sin");
-        sin.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        sin.setBackground(new java.awt.Color(238, 197, 145));
-        sin.addActionListener(e -> sinClicked());
-        topButtons.add(sin);
-        
         JButton four = new JButton("4");
         four.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        four.setBackground(new java.awt.Color(205, 197, 191));
+        four.setBackground(Color.WHITE);
         four.addActionListener(e -> updateInputField("4"));
         topButtons.add(four);
 
         JButton five = new JButton("5");
         five.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        five.setBackground(new java.awt.Color(205, 197, 191));
+        five.setBackground(Color.WHITE);
         five.addActionListener(e -> updateInputField("5"));
         topButtons.add(five);
 
         JButton six = new JButton("6");
         six.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        six.setBackground(new java.awt.Color(205, 197, 191));
+        six.setBackground(Color.WHITE);
         six.addActionListener(e -> updateInputField("6"));
         topButtons.add(six);
-        
-        JButton cos = new JButton("cos");
-        cos.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        cos.setBackground(new java.awt.Color(238, 197, 145));
-        cos.addActionListener(e -> cosClicked());
-        topButtons.add(cos);
-        
+
+        JButton multiply = new JButton("*");
+        multiply.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        multiply.setBackground(Color.WHITE);
+        multiply.addActionListener(e -> operatorClicked("*"));
+        topButtons.add(multiply);
+
+        JButton openingBracket = new JButton("(");
+        openingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        openingBracket.setBackground(Color.WHITE);
+        openingBracket.addActionListener(e -> openingBracketClicked());
+        topButtons.add(openingBracket);
+
+        JButton closingBracket = new JButton(")");
+        closingBracket.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        closingBracket.setBackground(Color.WHITE);
+        closingBracket.addActionListener(e -> closingBracketClicked());
+        topButtons.add(closingBracket);
+
+        // THIRD ROW:
+
         JButton one = new JButton("1");
         one.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        one.setBackground(new java.awt.Color(205, 197, 191));
+        one.setBackground(Color.WHITE);
         one.addActionListener(e -> updateInputField("1"));
         topButtons.add(one);
 
         JButton two = new JButton("2");
         two.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        two.setBackground(new java.awt.Color(205, 197, 191));
+        two.setBackground(Color.WHITE);
         two.addActionListener(e -> updateInputField("2"));
         topButtons.add(two);
 
         JButton three = new JButton("3");
         three.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        three.setBackground(new java.awt.Color(205, 197, 191));
+        three.setBackground(Color.WHITE);
         three.addActionListener(e -> updateInputField("3"));
         topButtons.add(three);
-        
-        JButton tan = new JButton("tan");
-        tan.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        tan.setBackground(new java.awt.Color(238, 197, 145));
-        tan.addActionListener(e -> tanClicked());
-        topButtons.add(tan);
+
+        JButton minus = new JButton("-");
+        minus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        minus.setBackground(Color.WHITE);
+        minus.addActionListener(e -> operatorClicked("-"));
+        topButtons.add(minus);
+
+        JButton square = new JButton("<html>x<sup>2</sup></html>");
+        square.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        square.setBackground(Color.WHITE);
+        square.addActionListener(e -> squareClicked());
+        topButtons.add(square);
+
+        JButton sqrt = new JButton("R");
+        sqrt.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        sqrt.setBackground(Color.WHITE);
+        sqrt.addActionListener(e -> sqrtClicked());
+        topButtons.add(sqrt);
+
+        all.add(topButtons);
+
+
+
+        JPanel bottomRow = new JPanel();
+        bottomRow.setLayout(new FlowLayout());
+
+        JPanel buttons = new JPanel();
+        buttons.setLayout(new GridLayout(1, 4, 3, 3));
+
+        JButton zero = new JButton("0");
+        zero.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        zero.setBackground(Color.WHITE);
+        zero.addActionListener(e -> updateInputField("0"));
+        buttons.add(zero);
 
         JButton decimalPoint = new JButton(".");
         decimalPoint.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        decimalPoint.setBackground(new java.awt.Color(238, 173, 14));
+        decimalPoint.setBackground(Color.WHITE);
         decimalPoint.addActionListener(e -> decimalPointClicked());
-        topButtons.add(decimalPoint);
-        
-        JButton zero = new JButton("0");
-        zero.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        zero.setBackground(new java.awt.Color(205, 197, 191));
-        zero.addActionListener(e -> updateInputField("0"));
-        topButtons.add(zero);
-     
+        buttons.add(decimalPoint);
+
+        JButton percent = new JButton("%");
+        percent.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        percent.setBackground(Color.WHITE);
+        percent.addActionListener(e -> percentClicked());
+        buttons.add(percent);
+
+        JButton plus = new JButton("+");
+        plus.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        plus.setBackground(Color.WHITE);
+        plus.addActionListener(e -> operatorClicked("+"));
+        buttons.add(plus);
+
+        bottomRow.add(buttons);
+
         JButton equals = new JButton("=");
         equals.setPreferredSize(new Dimension(BUTTON_WIDTH*2 + 6, BUTTON_HEIGHT));
-        equals.setBackground(new java.awt.Color(0, 250, 154));
+        equals.setBackground(new Color(190, 34, 34));
         equals.addActionListener(e -> equalsClicked());
-        topButtons.add(equals);
+        bottomRow.add(equals);
         
-        JButton ln = new JButton("ln");
-        ln.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        ln.setBackground(new java.awt.Color(238, 197, 145));
-        ln.addActionListener(e -> lnClicked()); 
-        topButtons.add(ln);
-        
-        JButton about = new JButton("About");
-        about.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        about.setBackground(new java.awt.Color(0, 200, 154));
-        about.addActionListener(e -> aboutClicked()); 
-        bottomButtons.add(about);
-        
-        JButton clear_all = new JButton("Clear All");
-        clear_all.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        clear_all.setBackground(Color.YELLOW);
-        clear_all.addActionListener(e -> clearClicked()); 
-        middleButtons.add(clear_all);
-        
-        JButton print_to_file = new JButton("Print to File");
-        print_to_file.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
-        print_to_file.setBackground(new java.awt.Color(0, 250, 154));
-        print_to_file.addActionListener(e -> printClicked()); 
-        bottomButtons.add(print_to_file);
-        
-        all.add(topButtons);
-        all.add(middleButtons);
-        all.add(bottomButtons);
-        
+        JButton scf = new JButton("Science");
+        scf.setPreferredSize(new Dimension(BUTTON_WIDTH*2 + 6, BUTTON_HEIGHT));
+        scf.setBackground(new Color(190, 34, 34));
+        scf.addActionListener(e -> scfClicked());
+        bottomRow.add(scf);
+
+        all.add(bottomRow);
+
         allAll.add(all);
         allFlow.add(allAll);
         return allFlow;
-        
     }
 
     /**
@@ -350,7 +290,6 @@ public class BasicMode extends KeyAdapter {
         enableDecimalPoint();
     }
 
-    
     /**
      * Adds a new character (number,...) to the expression.
      *
@@ -358,82 +297,6 @@ public class BasicMode extends KeyAdapter {
      */
     private void updateInputField(String newCharacter) {
         inputField.setText(inputField.getText() + newCharacter);
-    }
-    
-    private void clearClicked() {
-    	displayArea.setText("");
-        inputField.setText("");
-    }
-    
-    private void sinClicked() {
-    	if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "sin(");
-            bracketCounter++;
-        }
-    	else {
-            showWarning();
-    	}
-    }
-    
-    private void lnClicked(){
-        if(!canEnterSymbol()){
-            inputField.setText(inputField.getText() + "lon(");
-            bracketCounter++;
-        }
-    	else {
-            showWarning();
-    	}
-    }
-    
-    private void printClicked(){
-        File file = new File("C:\\Users\\N I T RO\\Documents\\GitHub\\Kalkulator-Scientific\\Kalkulator-Scientific-master\\Kalkulator\\hasil\\Hasil.txt");
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(file))){
-            bw.write("RESULT HASIL KALKULASI :");
-            bw.newLine();
-            bw.write("1*3+2");
-            bw.newLine();
-            bw.write("HASIL = 5");
-        }
-        catch(FileNotFoundException ex){
-            System.out.println("File "+file.getName()+" Tidak Ditemukan"); 
-        }
-        catch(IOException ex){          
-            System.out.println("File "+file.getName()+" Tidak Dapat DIbaca");
-        }
-    }
-    
-    private void aboutClicked(){
-        new Fr_about().show();
-    }
-    
-    private void cosClicked() {
-        if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "cos(");
-            bracketCounter++;
-        }
-    	else {
-            showWarning();
-    	 }
-    }
-    
-    private void tanClicked() {
-    	if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "tan(");
-            bracketCounter++;
-        }
-    	else {
-            showWarning();
-        }
-    }
-    
-    private void logClicked() {
-    	if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "log(");
-            bracketCounter++;
-        }
-    	else {
-            showWarning();
-    	}
     }
 
     /**
@@ -481,33 +344,6 @@ public class BasicMode extends KeyAdapter {
             showWarning();
         }
     }
-    
-     private void phiClicked() {
-        if (canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "p");
-        }
-        else {
-            showWarning();
-        }
-    }
-     
-     private void fakClicked() {
-        if (canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "!");
-        }
-        else {
-            showWarning();
-        }
-    }
-    
-    private void cubicsClicked() {
-        if (canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "^3");
-        }
-        else {
-            showWarning();
-        }
-    }
 
     /**
      * Adds the symbol for square root as "sqrt(" to the expression.
@@ -515,16 +351,6 @@ public class BasicMode extends KeyAdapter {
     private void sqrtClicked() {
         if (!canEnterSymbol()) {
             inputField.setText(inputField.getText() + "sqrt(");
-            bracketCounter++;
-        }
-        else {
-            showWarning();
-        }
-    }
-    
-    private void  cubicClicked() {
-        if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "cbrt(");
             bracketCounter++;
         }
         else {
@@ -584,6 +410,7 @@ public class BasicMode extends KeyAdapter {
         updateDisplayField(str, result);
         clearInputField();
         updateInputField(result);
+
     }
 
     /**
@@ -596,6 +423,10 @@ public class BasicMode extends KeyAdapter {
             updateInputField(newCharacter);
             enableDecimalPoint();
         }
+        /*else if (newCharacter.equals("-") && (inputField.getText().equals("") || inputField.getText().charAt(inputField.getText().length()-1) == '(')) {
+            updateInputField("-");
+            enableDecimalPoint();
+        }*/
         else {
             showWarning();
         }
@@ -656,10 +487,16 @@ public class BasicMode extends KeyAdapter {
         }
         return true;
     }
+
     /**
      * Whenever a user attempts to enter an invalid combination of symbols this warning is shown.
      */
     private void showWarning() {
-        JOptionPane.showMessageDialog(null, "Operasi Salah.", "Warning!", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Invalid operation.", "Invalid operation.", JOptionPane.WARNING_MESSAGE);
     }
+
+    private void scfClicked() {
+        Interface scf = new Interface();
+    }
+    
 }

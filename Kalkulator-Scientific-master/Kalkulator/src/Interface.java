@@ -49,7 +49,6 @@ public class Interface extends KeyAdapter {
         Container contentPane = frame.getContentPane();
 
         JPanel all = new JPanel();
-        all.setBackground(Color.LIGHT_GRAY);
         all.setLayout(new BoxLayout(all, BoxLayout.PAGE_AXIS));
         
         all.setBorder(new EmptyBorder(7, 7, 7, 7));
@@ -109,6 +108,9 @@ public class Interface extends KeyAdapter {
 
         JPanel topButtons = new JPanel();
         topButtons.setLayout(new GridLayout(9, 7, 4,4));
+        
+        JPanel middleButtons = new JPanel();
+        middleButtons.setLayout(new GridLayout(2, 2, 0, 0));
         
         JPanel bottomButtons = new JPanel();
         bottomButtons.setLayout(new GridLayout(1, 2, 0, 0));
@@ -318,6 +320,12 @@ public class Interface extends KeyAdapter {
         about.addActionListener(e -> aboutClicked()); 
         bottomButtons.add(about);
         
+        JButton clear_all = new JButton("Clear All");
+        clear_all.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        clear_all.setBackground(Color.YELLOW);
+        clear_all.addActionListener(e -> clearClicked()); 
+        middleButtons.add(clear_all);
+        
         JButton print_to_file = new JButton("Print to File");
         print_to_file.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         print_to_file.setBackground(new java.awt.Color(0, 250, 154));
@@ -325,6 +333,7 @@ public class Interface extends KeyAdapter {
         bottomButtons.add(print_to_file);
         
         all.add(topButtons);
+        all.add(middleButtons);
         all.add(bottomButtons);
         
         allAll.add(all);
@@ -341,6 +350,7 @@ public class Interface extends KeyAdapter {
         enableDecimalPoint();
     }
 
+    
     /**
      * Adds a new character (number,...) to the expression.
      *
@@ -348,6 +358,11 @@ public class Interface extends KeyAdapter {
      */
     private void updateInputField(String newCharacter) {
         inputField.setText(inputField.getText() + newCharacter);
+    }
+    
+    private void clearClicked() {
+    	displayArea.setText("");
+        inputField.setText("");
     }
     
     private void sinClicked() {
@@ -435,11 +450,11 @@ public class Interface extends KeyAdapter {
      * Undo button was clicked. Set the expression to the last entered expression, if any.
      */
     private void undoClicked() {
-        if (previousExpressions.isEmpty()) { //jika expression belum di push
+        if (previousExpressions.isEmpty()) {
             clearInputField();
         }
         else {
-            inputField.setText(previousExpressions.pop()); //ketika expression sudah di push
+            inputField.setText(previousExpressions.pop());
         }
     }
 
@@ -499,7 +514,7 @@ public class Interface extends KeyAdapter {
      */
     private void sqrtClicked() {
         if (!canEnterSymbol()) {
-            inputField.setText(inputField.getText() + "(");
+            inputField.setText(inputField.getText() + "sqrt(");
             bracketCounter++;
         }
         else {
@@ -564,7 +579,7 @@ public class Interface extends KeyAdapter {
         Evaluator evaluator = new Evaluator(str);
         String result = evaluator.getResult();
         if (result.startsWith("-")) {
-            result = "" + result + "";
+            result = "(0" + result + ")";
         }
         updateDisplayField(str, result);
         clearInputField();
@@ -631,21 +646,20 @@ public class Interface extends KeyAdapter {
      */
     private boolean canEnterSymbol() {
         String expression = inputField.getText();
-        if (expression.equals("")) { //untuk operator bisa input di awal
+        if (expression.equals("")) {
             return false;
         }
 
-        char last = expression.charAt(expression.length()-1); //setelah operand harus operator
+        char last = expression.charAt(expression.length()-1);
         if (last == '+' || last == '-' || last == '/' || last == '*' || last == '(') {
             return false;
         }
         return true;
     }
-
     /**
      * Whenever a user attempts to enter an invalid combination of symbols this warning is shown.
      */
     private void showWarning() {
-        JOptionPane.showMessageDialog(null, "Operasi Salah.", "AWAS!!!!!", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Operasi Salah.", "Warning!", JOptionPane.WARNING_MESSAGE);
     }
 }
