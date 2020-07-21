@@ -105,6 +105,11 @@ public class BasicMode extends KeyAdapter {
 
         JPanel topButtons = new JPanel();
         topButtons.setLayout(new GridLayout(3, 6, 3,3));
+        
+        JPanel middleButtons = new JPanel();
+        middleButtons.setLayout(new GridLayout(2, 1, 0,0));
+        
+        
 
 
         // FIRST ROW:
@@ -274,6 +279,12 @@ public class BasicMode extends KeyAdapter {
         scf.setBackground(new Color(190, 34, 34));
         scf.addActionListener(e -> scfClicked());
         bottomRow.add(scf);
+        
+        JButton clear_all = new JButton("Clear All");
+        clear_all.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        clear_all.setBackground(Color.YELLOW);
+        clear_all.addActionListener(e -> clearClicked()); 
+        middleButtons.add(clear_all);
 
         all.add(bottomRow);
 
@@ -394,6 +405,11 @@ public class BasicMode extends KeyAdapter {
         else {
             showWarning();
         }
+    }
+    
+    private void clearClicked() {
+    	displayArea.setText("");
+        inputField.setText("");
     }
 
     private void equalsClicked() {
