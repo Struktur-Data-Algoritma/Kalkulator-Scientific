@@ -19,7 +19,7 @@ public class Evaluator {
     public static final char LOG = 'L';
     public static final char PHI = 'P';
     public static final char FAK = 'F';
-    public static final char CUBIC = 'C';
+    public static final char CUBIC = 'B';
     public static final char LON = 'O';
     
   
@@ -29,15 +29,13 @@ public class Evaluator {
     private String result;
 
     /**
-     * Create a new evaluator for the given expression.
-     *
-     * @param expression Expression to be evaluated.
+     * Membuat evaluator baru untuk expression yang diberikan/diinput
+     * Parameter expression yang akan di evaluasi
      */
     public Evaluator(String expression) {
         String str = replace(expression);
-        str = getValidSubstring(str);
-        if (getOperator(str) == -1) {
-            result = "" + extractNumber(str);
+        if (getOperator(str) == -1) { //Jika output tidak memiliki operator maka langsung mencetak operand
+            result = "" + extractNumber(str); //(3) -> 3.0
         }
         else {
             makeTree(str);
@@ -47,7 +45,7 @@ public class Evaluator {
 
     /**
      *
-     * @return The value of the expression as string, "Err" if there was an error when evaluating.
+     * @return value String dari expression, bernilai "Err", untuk mengecek apakah result null atau tidak
      */
     public String getResult() {
         if (result == null) {
@@ -65,27 +63,26 @@ public class Evaluator {
     private double extractNumber(String str) {
         str = str.replace('(', ' ');
         str = str.replace(')', ' ');
-        str = str.trim();
+        str = str.trim(); //Trim() untuk menghilangkan spasi
         return Double.parseDouble(str);
     }
 
     /**
-     * Creates new tree.
-     *
-     * @param expression Expression to be traversed to make an appropriate tree.
+     * Membuat tree baru
+     * @parameter expression to be traversed to make an appropriate tree.
      */
     private void makeTree(String expression) {
         expression = getValidSubstring(expression);
         int index = getOperator(expression);
         if (index == -1) {
-            // There are no operators. The expression is a single value.
+            // There are no operators. The expression is a single value. (Cuman value/operand)
             double value = extractNumber(expression);
             tree = new BinaryTree(new Node(value, null, null));
         }
         else {
             char c = expression.charAt(index);
             if (isUnary(c)) {
-                // If the operator is a unary operator the node will only have one child.
+                // Jika operator merupakan unary operator makan node hanya akan memiliki satu anak kiri.
                 String newExpression = "";
                 if (c == SQRT) {
                     newExpression = expression.substring(index + 1, expression.length());
@@ -317,14 +314,15 @@ public class Evaluator {
     }
 
     /**
-     * Called at the beginning to replace user-friendly representation of square root ("sqrt") and square ("^2")
-     * with only one character to represent the same operation in the evaluation process.
+     * 
+     * Dipanggil di awal untuk mengganti representasi user-friendly dari user contoh root kuadrat -> ("sqrt") dan square -> ("^2")
+     * dengan hanya satu karakter untuk mewakili operasi yang sama dalam proses evaluasi
      *
-     * @param str Initial string as entered by the user.
-     * @return Valid string that works with the evaluator.
+     * @param str Initial string yang di input oleh user.
+     * @return string yang valid dengan evaluator.
      */
     private String replace(String str){
-        str = str.replaceAll("sqrt", "" + SQRT);
+        str = str.replaceAll("sqrt", "" + SQRT); //berpengaruh saat input
         str = str.replaceAll("cbrt", "" + CUBIC);
         str = str.replaceAll("sin", "" + SIN);
         str = str.replaceAll("cos", "" + COS);
@@ -355,11 +353,11 @@ public class Evaluator {
     }
     
     /**
-     * Removes the leading and ending brackets, for example:
-     * If input is (((1 + (2 - 3)))), then the outputted expression will be 1 + (2 - 3).
+     * Menghapus kurung depan dan akhir
+     * Contoh: Jika input (((1 + (2 - 3)))), maka output expression akan menjadi 1 + (2 - 3).
      *
-     * @param str Expression to validate.
-     * @return Valid substring of the inputted expression.
+     * @parameter expression str untuk validasi
+     * @return Valid substring dari input expression
      */
     private String getValidSubstring(String str) {
         while (str.charAt(0) == '(' && str.charAt(str.length() -1) == ')') {
