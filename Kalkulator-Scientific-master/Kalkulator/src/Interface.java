@@ -579,7 +579,7 @@ public class Interface extends KeyAdapter {
         Evaluator evaluator = new Evaluator(str);
         String result = evaluator.getResult();
         if (result.startsWith("-")) {
-            result = "(0" + result + ")";
+            result = "" + result + "";
         }
         updateDisplayField(str, result);
         clearInputField();
