@@ -18,7 +18,9 @@ import java.io.IOException;
  * This class displays a simple calculator.
  *
  * @author Luka Kralj
- * @version 30 March 2018
+ * @author Sabar Muhamad Itikap
+ * @author Giusty Fadh Wiranapoera
+ * @version 22 Juli 2020
  */
 public class Interface extends KeyAdapter {
     private static final int BUTTON_WIDTH = 50;

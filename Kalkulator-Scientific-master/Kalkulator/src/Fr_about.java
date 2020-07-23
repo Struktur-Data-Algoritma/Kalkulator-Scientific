@@ -39,9 +39,9 @@ public class Fr_about extends javax.swing.JFrame {
         setLocation(new java.awt.Point(20, 10));
         setResizable(false);
 
-        jLabel1.setText("Kalkulator-Scientific 1.2020.1.0 .");
+        jLabel1.setText("Kalkulator-Scientific 1.2");
 
-        jLabel2.setText("© 2020 Politeknik Negeri Bandung. Hak cipta dilindungi undang-undang");
+        jLabel2.setText("Batasan Aplikasi : 1. Tanda minus pada operand akan dianggap sebagai Operator");
 
         jLabel4.setText("Created by:");
 
@@ -77,7 +77,7 @@ public class Fr_about extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(27, 27, 27)
@@ -86,7 +86,7 @@ public class Fr_about extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
