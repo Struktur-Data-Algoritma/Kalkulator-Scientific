@@ -40,7 +40,7 @@ public class BasicMode extends KeyAdapter {
         bracketCounter = 0;
         previousExpressions = new Stack<>();
 
-        JFrame frame = new JFrame("Basic mode");
+        JFrame frame = new JFrame("KALKULATOR");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = frame.getContentPane();
 
@@ -82,7 +82,7 @@ public class BasicMode extends KeyAdapter {
         frame.addKeyListener(this);
         frame.setFocusableWindowState(true);
         frame.setAutoRequestFocus(true);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
@@ -418,7 +418,7 @@ public class BasicMode extends KeyAdapter {
         Evaluator evaluator = new Evaluator(str);
         String result = evaluator.getResult();
         if (result.startsWith("-")) {
-            result = "(0" + result + ")";
+            result = "" + result + "";
         }
         updateDisplayField(str, result);
         clearInputField();
