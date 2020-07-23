@@ -19,6 +19,8 @@ import java.io.IOException;
  *
  * @author Luka Kralj
  * @version 30 March 2018
+ * Development : Sabar Muhamad Itikap - 191524058
+ *               Giusty Fadh Wiranapoera - 191524044
  */
 public class Interface extends KeyAdapter {
     private static final int BUTTON_WIDTH = 50;
@@ -44,8 +46,8 @@ public class Interface extends KeyAdapter {
         bracketCounter = 0;
         previousExpressions = new Stack<>();
 
-        JFrame frame = new JFrame("KALKULATOR SCIENTIFIC");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame("Kalkulator | Scientific");
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         Container contentPane = frame.getContentPane();
 
         JPanel all = new JPanel();

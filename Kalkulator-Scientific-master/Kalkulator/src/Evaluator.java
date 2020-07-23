@@ -8,6 +8,8 @@ import java.util.List;
  *
  * @author Luka Kralj
  * @version 30 March 2018
+ *  * Development : Sabar M Ititkap - 191524058
+ *                  Giusty Fadh Wiranapoera - 191524044
  */
 public class Evaluator {
     public static final char SQRT = 'V';

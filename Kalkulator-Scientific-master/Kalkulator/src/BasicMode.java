@@ -14,6 +14,8 @@ import java.util.Stack;
  *
  * @author Luka Kralj
  * @version 30 March 2018
+ * Development : Sabar M Ititkap - 191524058
+ *               Giusty Fadh Wiranapoera - 191524044
  */
 public class BasicMode extends KeyAdapter {
 
@@ -40,7 +42,7 @@ public class BasicMode extends KeyAdapter {
         bracketCounter = 0;
         previousExpressions = new Stack<>();
 
-        JFrame frame = new JFrame("KALKULATOR");
+        JFrame frame = new JFrame("Kalkulator | Standar");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container contentPane = frame.getContentPane();
 
