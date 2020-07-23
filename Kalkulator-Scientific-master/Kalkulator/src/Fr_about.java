@@ -6,7 +6,8 @@
 
 /**
  *
- * @author giust
+ * @author Giusty Fadh Wiranapoer - 191524044
+ *         @2020
  */
 public class Fr_about extends javax.swing.JFrame {
 
@@ -34,7 +35,7 @@ public class Fr_about extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("About Kalkulator-Scientific");
         setLocation(new java.awt.Point(20, 10));
         setResizable(false);
@@ -45,7 +46,7 @@ public class Fr_about extends javax.swing.JFrame {
 
         jLabel4.setText("Created by:");
 
-        jLabel5.setText("Sabar M Itikap - 191524058");
+        jLabel5.setText("Sabar Muhamad Itikap - 191524058");
 
         jLabel6.setText("Giusty Fadh Wiranapoera - 191524044");
 
@@ -83,10 +84,10 @@ public class Fr_about extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())
         );
